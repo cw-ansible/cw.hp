@@ -1,0 +1,129 @@
+
+## overide the current host HOSTNAME.
+#
+# You probably won't need to change that but if your hostname/DNS is messy.
+# hp_default_hostname: '$(hostname -s)'
+
+## overide the current host domaine name.
+#
+# You probably won't need to change that but if your hostname/DNS is messy.
+# hp_default_domainname: '$(hostname -d)'
+
+## What is the name of the iLO system
+#
+# You can base your iLO hostname on your server's hostname.
+# hp_default_ilo_hostname: '$HOSTNAME-ilo'
+
+## What is the iLO system's domain name
+#
+# You can use this if your iLO interfaces are not in the same domain than
+# your server.
+# hp_default_ilo_domain: '$DOMAINNAME'
+
+## The IP address of the iLO interface.
+#
+# By default try a DNS resolution. You can use a hard coded value.
+# hp_default_ilo_ip_address: '$(dig +short $ILO_HOSTNAME.$ILO_DOMAIN | tail -n 1)'
+
+## The netmask of the iLO interface.
+#
+# Use a 4-byte dotted notation, no CIDR.
+# hp_default_ilo_ip_netmask: '255.255.255.0'
+
+## The iLO interface default gateway.
+#
+# By default use the same gateway than your server does.
+#
+# You can use complex stuff here, such as:
+#
+#  $(ip r s 0.0.0.0/0 | sed 's/.*via \(.*\) dev .*/\1/' | \
+#		 awk -F.  '{print $1 "." $2 "." 127 "." 254}')
+#                 
+# hp_default_ilo_ip_gateway: "$(ip r s 0.0.0.0/0 | sed 's/.*via \(.*\) dev .*/\1/')"
+
+## A valid iLO license key.
+#
+# hp_default_ilo_license: 01234567890ABCDEFGHIJKLMN
+
+## DNS server to use from ILO interface.
+#
+# hp_default_dns_server_1: 8.8.8.8
+# hp_default_dns_server_2: 8.8.4.4
+
+
+## Access for nagios (if you need one)
+#
+# hp_ilo_default_nagios_user: nagios
+# hp_ilo_default_nagios_password: nagiosPassword
+
+## Access for root
+#
+# hp_ilo_default_root_user: root
+# hp_ilo_default_root_password: root
+
+
+
+### Configuration for APT
+
+
+
+## URL of the hp tools debian/ubuntu APT repository
+hp_apt_url: 'http://downloads.linux.hp.com/SDR/repo'
+
+## List of repositories to install depending on ansible_lsb.codename.
+#
+# Note that some distibution does not have specific packages (yet?)
+# See http://downloads.linux.hp.com/SDR/repo for details.
+#
+# You probably don't want to change that list.
+hp_apt_repositories:
+  # Ubuntu
+  - name: precise
+    repositories:
+    - repo: 'deb {{hp_apt_url}}/mcp/ubuntu precise current/non-free'
+    - repo: 'deb {{hp_apt_url}}/stk/ubuntu precise current/non-free'
+  - name: saucy
+    repositories:
+    - repo: 'deb {{hp_apt_url}}/mcp/ubuntu precise current/non-free'
+    - repo: 'deb {{hp_apt_url}}/stk/ubuntu precise current/non-free'
+  - name: trusty
+    repositories:
+    - repo: 'deb {{hp_apt_url}}/mcp/ubuntu trusty current/non-free'
+    - repo: 'deb {{hp_apt_url}}/stk/ubuntu precise current/non-free'
+  # Debian
+  - name: lenny
+    repositories:
+    - repo: 'deb {{hp_apt_url}}/mcp/debian lenny current/non-free'
+    - repo: 'deb {{hp_apt_url}}/stk/debian lenny current/non-free'
+  - name: squeeze
+    repositories:
+    - repo: 'deb {{hp_apt_url}}/mcp/debian squeeze current/non-free'
+    - repo: 'deb {{hp_apt_url}}/stk/debian squeeze current/non-free'
+  - name: wheezy
+    repositories:
+    - repo: 'deb {{hp_apt_url}}/mcp/debian wheezy current/non-free'
+    - repo: 'deb {{hp_apt_url}}/stk/debian squeeze current/non-free'
+
+## List of keys used to sign HP debian/ubuntu packages.
+#
+# You probably don't want to change that list.
+hp_apt_keys:
+  - url: 'http://downloads.linux.hp.com/SDR/hpPublicKey1024.pub'
+    id: 2689B887
+  - url: 'http://downloads.linux.hp.com/SDR/hpPublicKey2048.pub'
+    id: 5CE2D476
+
+
+hp_directories_to_create:
+  - path: /etc/hponcfg
+    mode: '0700'
+  - path: /var/log/hp-health
+  
+hp_files_to_copy:
+  - src: etc/init.d/ilo-set
+    mode: '0755'
+  - src: etc/hponcfg/setup-ilo.xml
+
+hp_templates_to_copy:
+  - src: etc/default/ilo-set
+    mode: '0600'

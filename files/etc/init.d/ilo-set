@@ -1,0 +1,104 @@
+#!/bin/bash
+
+# set-ilo --- Set ILO parameters
+# Copyright © 2014 Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
+# Created: 2014-03-20
+# Last changed: 2015-04-21 14:50:29
+#
+# This program is free software. It comes without any warranty, to
+# the extent permitted by applicable law. You can redistribute it
+# and/or modify it under the terms of the Do What The Fuck You Want
+# To Public License, Version 2, as published by Sam Hocevar. See
+# http://sam.zoy.org/wtfpl/COPYING for more details.
+
+### BEGIN INIT INFO
+# Provides:          set-ilo
+# Required-Start:    $network
+# Required-Stop:     $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Set ILO info
+# Description:       Configure all ILO users and network settings.
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+
+DAEMON_NAME="ILO parameters"
+
+
+HPONCFG=$(which hponcfg)
+HPONCFG_SCRIPT=/etc/hponcfg/setup-ilo.xml
+
+if test -r /etc/default/ilo-set; then
+    . /etc/default/ilo-set
+fi
+
+action=$1
+shift
+
+if test -z "$action"; then
+    action=status
+fi
+
+function setup_ilo {
+    sed \
+	-e "s/@@ILO_HOSTNAME@@/$ILO_HOSTNAME/" \
+	-e "s/@@ILO_DOMAIN@@/$ILO_DOMAIN/" \
+	-e "s/@@ILO_IP_ADDRESS@@/$ILO_IP_ADDRESS/" \
+	-e "s/@@ILO_IP_NETMASK@@/$ILO_IP_NETMASK/" \
+	-e "s/@@ILO_IP_GATEWAY@@/$ILO_IP_GATEWAY/" \
+	-e "s/@@ILO_LICENSE@@/$ILO_LICENSE/" \
+	-e "s/@@ILO_DNS_SERVER1@@/$ILO_DNS_SERVER1/" \
+	-e "s/@@ILO_DNS_SERVER2@@/$ILO_DNS_SERVER2/" \
+	-e "s/@@ILO_NAGIOS_USER@@/$ILO_NAGIOS_USER/" \
+	-e "s/@@ILO_NAGIOS_PASSWORD@@/$ILO_NAGIOS_PASSWORD/" \
+	-e "s/@@ILO_ROOT_USER@@/$ILO_ROOT_USER/" \
+	-e "s/@@ILO_ROOT_PASSWORD@@/$ILO_ROOT_PASSWORD/" \
+	$HPONCFG_SCRIPT
+}
+
+function sanity_checks {
+    if ! test -x $HPONCFG; then
+        log_action_cont_msg "$HPONCFG not found"
+        log_action_end_msg 1
+        exit 1
+    fi
+
+    if ! test -r $HPONCFG_SCRIPT; then
+        log_action_cont_msg "$HPONCFG_SCRIPT not found"
+        log_action_end_msg 1
+        exit 1
+    fi
+
+    for var in ILO_HOSTNAME ILO_DOMAIN; do
+	if test -z "${!var}"; then
+	    log_action_cont_msg "$var is not set"
+	    log_action_end_msg 1
+            exit 1
+	fi
+    done
+}
+
+case "$action" in
+    start|restart)
+        log_action_begin_msg "Setting $DAEMON_NAME"
+        sanity_checks
+        setup_ilo | $HPONCFG -f /dev/stdin
+        log_action_end_msg $?
+        ;;
+    try)
+        log_action_begin_msg "Setting $DAEMON_NAME"
+        sanity_checks
+        setup_ilo
+        log_action_end_msg $?
+        ;;
+    stop) ;;
+    status)
+        $HPONCFG -g
+        ;;
+    *)
+        echo "Usage: $0 {start|try|stop|status|restart}" >&2
+        exit 1
+        ;;
+esac

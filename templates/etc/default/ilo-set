@@ -1,0 +1,23 @@
+# -*- sh -*-
+
+HOSTNAME={{ hp_default_hostname | default('$(hostname -s)') }}
+DOMAINNAME={{ hp_default_domainname | default('$(hostname -d)') }}
+
+ILO_HOSTNAME={{ hp_default_ilo_hostname | default('$HOSTNAME-ilo') }}
+ILO_DOMAIN={{ hp_default_ilo_domain | default('$DOMAINNAME') }}
+
+
+ILO_IP_ADDRESS={{ hp_default_ilo_ip_address | default('$(dig +short $ILO_HOSTNAME.$ILO_DOMAIN | tail -n 1)') }}
+ILO_IP_NETMASK={{ hp_default_ilo_ip_netmask | default('255.255.255.0') }}
+ILO_IP_GATEWAY={{ hp_default_ip_gateway | default("$(ip r s 0.0.0.0/0 | sed 's/.*via \(.*\) dev .*/\\1/')") }}
+
+		
+ILO_LICENSE={{ hp_default_ilo_license | default("") }}
+ILO_DNS_SERVER1={{ hp_default_dns_server_1 | default('8.8.8.8') }}
+ILO_DNS_SERVER2={{ hp_default_dns_server_2 | default('8.8.4.4') }}
+
+ILO_NAGIOS_USER={{ hp_ilo_default_nagios_user | default('nagios') }}
+ILO_NAGIOS_PASSWORD={{ hp_ilo_default_nagios_password | default('nagios')}}
+
+ILO_ROOT_USER={{ hp_ilo_default_root_user | default('root') }}
+ILO_ROOT_PASSWORD={{ hp_ilo_default_root_password | default('root') }}

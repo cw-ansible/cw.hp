@@ -1,0 +1,2 @@
+nagios ALL=(ALL) NOPASSWD:/usr/sbin/hpacucli
+nagios ALL=(ALL) NOPASSWD:/sbin/hpasmcli

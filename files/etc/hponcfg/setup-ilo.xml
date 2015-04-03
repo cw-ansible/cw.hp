@@ -1,0 +1,82 @@
+<RIBCL VERSION="2.0">
+
+  <LOGIN USER_LOGIN="admin" PASSWORD="password">
+
+    <RIB_INFO MODE="write">
+      <FACTORY_DEFAULTS/>
+    </RIB_INFO>
+
+    <RIB_INFO MODE="write">
+      <LICENSE>
+	<ACTIVATE KEY="@@ILO_LICENSE@@"/>
+      </LICENSE>
+    </RIB_INFO>
+
+    <SERVER_INFO MODE="write">
+      <SERVER_AUTO_PWR VALUE="Random"/>
+    </SERVER_INFO>
+
+    <USER_INFO mode="write">
+      <ADD_USER USER_NAME="Nagios Monitor"
+    		USER_LOGIN="@@ILO_NAGIOS_USER@@"
+    		PASSWORD="@@ILO_NAGIOS_PASSWORD@@">
+    	<ADMIN_PRIV value="N"/>
+    	<REMOTE_CONS_PRIV value="N"/>
+    	<RESET_SERVER_PRIV value="N"/>
+    	<VIRTUAL_MEDIA_PRIV value="N"/>
+    	<CONFIG_ILO_PRIV value="N"/>
+      </ADD_USER>
+
+      <ADD_USER USER_NAME="root"
+    		USER_LOGIN="@@ILO_ROOT_USER@@"
+    		PASSWORD="@@ILO_ROOT_PASSWORD@@">
+    	<ADMIN_PRIV value="Y"/>
+    	<REMOTE_CONS_PRIV value="Y"/>
+    	<RESET_SERVER_PRIV value="Y"/>
+    	  <VIRTUAL_MEDIA_PRIV value="Y"/>
+    	  <CONFIG_ILO_PRIV value="Y"/>
+      </ADD_USER>
+    </USER_INFO>
+
+    <RIB_INFO mode="write">
+      <MOD_NETWORK_SETTINGS>
+    	<ENABLE_NIC VALUE="Y"/>
+    	<!-- <SHARED_NETWORK_PORT VALUE="N"/> -->
+    	<!-- <VLAN_ENABLED VALUE="N"/> -->
+    	<SPEED_AUTOSELECT VALUE="Y"/>
+    	<NIC_SPEED VALUE="10"/>
+    	<FULL_DUPLEX VALUE="N"/>
+    	<DHCP_ENABLE VALUE="N"/>
+    	<DHCP_GATEWAY VALUE="N"/>
+    	<DHCP_DNS_SERVER VALUE="N"/>
+    	<DHCP_WINS_SERVER VALUE="N"/>
+    	<DHCP_STATIC_ROUTE VALUE="N"/>
+    	<DHCP_DOMAIN_NAME VALUE="N"/>
+    	<!-- <DHCP_SNTP_SETTINGS VALUE="Y"/> -->
+    	<REG_WINS_SERVER VALUE="Y"/>
+    	<REG_DDNS_SERVER VALUE="Y"/>
+    	<PING_GATEWAY VALUE="Y"/>
+    	<IP_ADDRESS VALUE="@@ILO_IP_ADDRESS@@"/>
+    	<SUBNET_MASK VALUE="@@ILO_IP_NETMASK@@"/>
+    	<GATEWAY_IP_ADDRESS VALUE="@@ILO_IP_GATEWAY@@"/>
+    	<DNS_NAME VALUE="@@ILO_HOSTNAME@@"/>
+    	<DOMAIN_NAME VALUE="@@ILO_DOMAIN@@"/>
+    	<PRIM_DNS_SERVER VALUE="@@ILO_DNS_SERVER1@@"/>
+    	<SEC_DNS_SERVER VALUE="@@ILO_DNS_SERVER2@@"/>
+    	<TER_DNS_SERVER VALUE="0.0.0.0"/>
+    	<PRIM_WINS_SERVER VALUE="0.0.0.0"/>
+    	<SEC_WINS_SERVER VALUE="0.0.0.0"/>
+    	<!-- <SNTP_SERVER1 VALUE="0.0.0.0"/> -->
+    	<!-- <SNTP_SERVER2 VALUE="0.0.0.0"/> -->
+    	<!-- <TIMEZONE VALUE="Europe/Paris"/> -->
+    	<!-- <STATIC_ROUTE_1 DEST="0.0.0.0" MASK="0.0.0.0" GATEWAY="0.0.0.0"/> -->
+    	<!-- <STATIC_ROUTE_2 DEST="0.0.0.0" MASK="0.0.0.0" GATEWAY="0.0.0.0"/> -->
+    	<!-- <STATIC_ROUTE_3 DEST="0.0.0.0" MASK="0.0.0.0" GATEWAY="0.0.0.0"/> -->
+	<STATIC_ROUTE_1 DEST = "0.0.0.0" GATEWAY = "0.0.0.0"/>
+	<STATIC_ROUTE_2 DEST = "0.0.0.0" GATEWAY = "0.0.0.0"/>
+	<STATIC_ROUTE_3 DEST = "0.0.0.0" GATEWAY = "0.0.0.0"/>
+      </MOD_NETWORK_SETTINGS>
+    </RIB_INFO>
+
+  </LOGIN>
+</RIBCL>
