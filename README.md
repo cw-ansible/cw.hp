@@ -6,7 +6,7 @@ lang: american
 -->
 
 [![Build Status](https://travis-ci.org/cw-ansible/cw.dell.svg?branch=master)](https://travis-ci.org/cw-ansible/cw.hp)
-[![Tweet this](http://img.shields.io/badge/%20-Tweet-00aced.svg)](https://twitter.com/intent/tweet?tw_p=tweetbutton&via=renard_0&text=Install%20%23Dell%20%23OpenManage%20tools%20with%20%23Ansible)
+[![Tweet this](http://img.shields.io/badge/Tweet-it00aced.svg)](https://twitter.com/intent/tweet?tw_p=tweetbutton&via=renard_0&text=Install%20%23Dell%20%23OpenManage%20tools%20with%20%23Ansible)
 [![Follow me on twitter](http://img.shields.io/badge/Twitter-Follow-00aced.svg)](https://twitter.com/intent/follow?region=follow_link&screen_name=renard_0&tw_p=followbutton)
 
 # Install HP utils with ansible
