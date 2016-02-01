@@ -89,7 +89,11 @@ hp_apt_repositories:
   - name: trusty
     repositories:
     - repo: 'deb {{hp_apt_url}}/mcp/ubuntu trusty current/non-free'
-    - repo: 'deb {{hp_apt_url}}/stk/ubuntu precise current/non-free'
+    - repo: 'deb {{hp_apt_url}}/stk/ubuntu trusty current/non-free'
+  - name: xenial
+    repositories:
+    - repo: 'deb {{hp_apt_url}}/mcp/ubuntu trusty current/non-free'
+    - repo: 'deb {{hp_apt_url}}/stk/ubuntu trusty current/non-free'
   # Debian
   - name: lenny
     repositories:
@@ -103,6 +107,10 @@ hp_apt_repositories:
     repositories:
     - repo: 'deb {{hp_apt_url}}/mcp/debian wheezy current/non-free'
     - repo: 'deb {{hp_apt_url}}/stk/debian squeeze current/non-free'
+  - name: jessie
+    repositories:
+    - repo: 'deb {{hp_apt_url}}/mcp/debian jessie current/non-free'
+    - repo: 'deb {{hp_apt_url}}/stk/debian jessie current/non-free'
 
 ## List of keys used to sign HP debian/ubuntu packages.
 #
