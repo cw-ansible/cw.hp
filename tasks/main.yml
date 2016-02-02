@@ -1,4 +1,4 @@
 ---
 
 - include: run.yml
-  when: not (hp_run_role | default(False))
+  when: hp_run_role

@@ -62,6 +62,7 @@
   with_items:
     - hponcfg
     - lib32stdc++6
+    - patch
   ignore_errors: true
 
 - name: install distribution specific tools (hpacucli)
