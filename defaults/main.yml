@@ -1,3 +1,9 @@
+---
+
+## Run the HP rule.
+#
+# set to no if you don't want to install HP tools on the server.
+hp_run_role: yes
 
 ## overide the current host HOSTNAME.
 #

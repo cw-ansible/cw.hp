@@ -1,0 +1,17 @@
+index fe07ad0..b5b83a3 100755
+--- a/init.d/hp-health
++++ b/init.d/hp-health
+@@ -40,6 +40,13 @@ ILO_WITH_EMBEDDED_HEALTH_G3=3
+ PARAM=$1
+ val=0
+
++which dmidecode > /dev/null 2>&1
++if [ $? -eq 0 ] ; then
++    if [ "$(dmidecode -s chassis-manufacturer)" != "HP" ]; then
++      exit 0
++    fi
++fi
++
+ #check for systemctl command path
+ which systemctl > /dev/null 2>&1
+ if [ $? -eq 0 ] ; then
