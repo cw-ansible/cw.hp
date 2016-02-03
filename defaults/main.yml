@@ -74,12 +74,12 @@ hp_run_role: yes
 
 
 ## URL of the hp tools debian/ubuntu APT repository
-hp_apt_url: 'http://downloads.linux.hp.com/SDR/repo'
+hp_apt_url: 'http://downloads.linux.hpe.com/SDR/repo'
 
 ## List of repositories to install depending on ansible_lsb.codename.
 #
 # Note that some distibution does not have specific packages (yet?)
-# See http://downloads.linux.hp.com/SDR/repo for details.
+# See http://downloads.linux.hpe.com/SDR/repo for details.
 #
 # You probably don't want to change that list.
 hp_apt_repositories:
@@ -122,11 +122,11 @@ hp_apt_repositories:
 #
 # You probably don't want to change that list.
 hp_apt_keys:
-  - url: 'http://downloads.linux.hp.com/SDR/hpPublicKey1024.pub'
+  - url: 'http://downloads.linux.hpe.com/SDR/hpPublicKey1024.pub'
     id: 2689B887
-  - url: 'http://downloads.linux.hp.com/SDR/hpPublicKey2048.pub'
+  - url: 'http://downloads.linux.hpe.com/SDR/hpPublicKey2048.pub'
     id: 5CE2D476
-
+  - url: 'https://downloads.linux.hpe.com/SDR/hpPublicKey2048_key1.pub'
 
 hp_directories_to_create:
   - path: /etc/hponcfg

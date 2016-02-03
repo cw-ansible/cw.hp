@@ -12,7 +12,7 @@ lang: american
 # Install HP utils with ansible
 
 This Ansible role install
-[HP Software Delivery Repository](http://downloads.linux.hp.com/SDR/repo/)
+[HP Software Delivery Repository](http://downloads.linux.hpe.com/SDR/repo/)
 tools.
 
 ## Usage
@@ -32,7 +32,7 @@ See specific documentation in `defaults/main.yml`
 
 ## Links
 
-- [HP Software Delivery Repository](http://downloads.linux.hp.com/SDR/repo/)
+- [HP Software Delivery Repository](http://downloads.linux.hpe.com/SDR/repo/)
 
 
 ## Copyright
