@@ -126,7 +126,7 @@ hp_apt_keys:
     id: 2689B887
   - url: 'http://downloads.linux.hpe.com/SDR/hpPublicKey2048.pub'
     id: 5CE2D476
-  - url: 'https://downloads.linux.hpe.com/SDR/hpPublicKey2048_key1.pub'
+  - url: 'http://downloads.linux.hpe.com/SDR/hpPublicKey2048_key1.pub'
     id: B1275EA3
     
 hp_directories_to_create:
